@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\MarketResearch;
 
 use App\Models\MarketResearch;
-use App\Models\Team;
 use Livewire\Component;
 
 class Create extends Component
@@ -24,7 +23,7 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->marketResearch->user_id = auth()->id();
         $this->marketResearch->save();
 
         return redirect()->route('admin.market-researchs.index');
@@ -41,9 +40,13 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            
+            'marketResearch.user_id' => [
+                'string',
+                'nullable',
+            ],
+
         ];
     }
 
-    
+
 }

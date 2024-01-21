@@ -10,12 +10,10 @@ class Create extends Component
 {
     public Motion $motion;
 
-    // public array $listsForFields = [];
 
     public function mount(Motion $motion)
     {
         $this->motion = $motion;
-        // $this->initListsForFields();
     }
 
     public function render()
@@ -26,6 +24,7 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
+        $this->motion->user_id = auth()->id();
 
         $this->motion->save();
 
@@ -47,16 +46,9 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            // 'motion.team_id' => [
-            //     'integer',
-            //     'exists:teams,id',
-            //     'required',
-            // ],
+
         ];
     }
 
-    // protected function initListsForFields(): void
-    // {
-    //     $this->listsForFields['team'] = Team::pluck('name', 'id')->toArray();
-    // }
+
 }

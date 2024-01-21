@@ -37,11 +37,6 @@ class Create extends Component
 
         $this->post->save();
         $this->post->category()->sync($this->category);
-        // $this->dispatchBrowserEvent('swal:modal', [
-        //     'type' => 'success',
-        //     'title' => 'Post added successfully',
-        //     'text' => '',
-        // ]);
         event(new PostCreated($this->post));
 
         return redirect()->route('admin.posts.index');

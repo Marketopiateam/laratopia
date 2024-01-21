@@ -20,12 +20,14 @@
     <div class="form-group {{ $errors->has('design.post_id') ? 'invalid' : '' }}">
         <label class="form-label" for="post">{{ trans('cruds.design.fields.post') }}</label>
 
-            <select wire:model="design.post_id" name="post"
-                class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" required>
+            <select wire:model="post_id" name="post"
+                    class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border
+                    border-gray-400 w-full py-2 focus:outline-none
+                    focus:border-blue-400" required>
             @foreach ($posts as $post)
                 <option value="{{ $post->id }}">{{ $post->title }}</option>
             @endforeach
-        </select>
+            </select>
         <div class="validation-message">
             {{ $errors->first('design.post_id') }}
         </div>

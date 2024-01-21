@@ -10,12 +10,10 @@ class Create extends Component
 {
     public Studio $studio;
 
-    // public array $listsForFields = [];
 
     public function mount(Studio $studio)
     {
         $this->studio = $studio;
-        // $this->initListsForFields();
     }
 
     public function render()
@@ -26,7 +24,7 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->studio->user_id = auth()->id();
         $this->studio->save();
 
         return redirect()->route('admin.studios.index');
@@ -51,9 +49,9 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 
-    
+
 }

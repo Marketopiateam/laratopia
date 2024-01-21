@@ -24,7 +24,7 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->motion->user_id = auth()->id();
         $this->motion->save();
 
         return redirect()->route('admin.motions.index');
@@ -45,9 +45,9 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 
-    
+
 }

@@ -9,18 +9,18 @@ use Notification;
 
 class ProjectObserver
 {
-    public function created(Project $project): void
-    {
-        $payload = [
-            'action' => 'created',
-            'model'  => sprintf('%s#%s', get_class($project), $project->id),
-            'reason' => auth()->user(),
-        ];
+    // public function created(Project $project): void
+    // {
+    //     $payload = [
+    //         'action' => 'created',
+    //         'model'  => sprintf('%s#%s', get_class($project), $project->id),
+    //         'reason' => auth()->user(),
+    //     ];
 
-        $admins = User::admins()->get();
+    //     $admins = User::admins()->get();
 
-        Notification::send($admins, new DataChangeEmailNotification($payload));
-    }
+    //     Notification::send($admins, new DataChangeEmailNotification($payload));
+    // }
 
     public function updated(Project $project): void
     {

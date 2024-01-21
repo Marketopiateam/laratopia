@@ -24,7 +24,7 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->system->user_id = auth()->id();
         $this->system->save();
 
         return redirect()->route('admin.systems.index');
@@ -41,9 +41,9 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 
-    
+
 }

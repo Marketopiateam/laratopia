@@ -12,11 +12,18 @@ trait FilterByUser
             parent::boot();
 
             self::creating(function($model) {
-                $model->user_id = auth()->id() || auth()->user()->is_admin;
+                // Only set the user_id if the user is not an admin
+                if (!auth()->user()->is_admin) {
+                    $model->user_id = auth()->id();
+                }
             });
 
-            self::addGlobalScope(function(Builder $builder) {
-                $builder->where('user_id', auth()->id()) || auth()->user()->is_admin;
+            self::addGlobalScope('filterByUser', function(Builder $builder) {
+                if (!auth()->user()->is_admin) {
+                    $builder->where('user_id', auth()->id());
+                }
+                // If the user is an admin, no additional global scope is applied,
+                // so they see everything.
             });
         }
 

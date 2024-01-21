@@ -24,7 +24,7 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->studio->user_id = auth()->id();
         $this->studio->save();
 
         return redirect()->route('admin.studios.index');
@@ -45,14 +45,14 @@ class Edit extends Component
                 'nullable',
                 'date_format:' . config('project.date_format'),
             ],
-            
+
             'studio.status' => [
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 
-    
+
 }

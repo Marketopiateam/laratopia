@@ -65,7 +65,8 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->video->project_id = $this->selectedProjectId;
+        $this->video->post_id = $this->selectedProjectId;
         $this->video->save();
         $this->video->category()->sync($this->category);
         $this->syncMedia();

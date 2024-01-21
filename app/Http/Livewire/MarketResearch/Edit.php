@@ -25,6 +25,7 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
+        $this->marketResearch->user_id = auth()->id();
 
         $this->marketResearch->save();
 
@@ -42,9 +43,9 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            
+
         ];
     }
 
-    
+
 }

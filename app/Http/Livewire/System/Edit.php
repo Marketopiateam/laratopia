@@ -10,12 +10,10 @@ class Edit extends Component
 {
     public System $system;
 
-    public array $listsForFields = [];
 
     public function mount(System $system)
     {
         $this->system = $system;
-        $this->initListsForFields();
     }
 
     public function render()
@@ -26,7 +24,7 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
-
+        $this->system->user_id = auth()->id();
         $this->system->save();
 
         return redirect()->route('admin.systems.index');
@@ -43,16 +41,9 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            'system.team_id' => [
-                'integer',
-                'exists:teams,id',
-                'required',
-            ],
+           
         ];
     }
 
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['team'] = Team::pluck('name', 'id')->toArray();
-    }
+
 }

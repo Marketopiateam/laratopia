@@ -11,6 +11,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Listeners\Design\DesignCreatedEmail;
 use App\Events\Design\DesignCreated;
 
+
 class Create extends Component
 {
     public Design $design;
@@ -18,6 +19,7 @@ class Create extends Component
     public $posts;
     public $projects;
     public $post;
+    public $post_id;
     public $project;
 
     public array $mediaToRemove = [];
@@ -61,26 +63,33 @@ class Create extends Component
 
     public function updatedSelectedProjectId($projectId)
     {
-        $this->posts = Post::where('project_id', $projectId)->get(); // Update posts based on selected project
+        $this->posts = Post::where('project_id', $projectId)->get();
     }
 
-    
+
 
     public function render()
     {
         return view('livewire.design.create');
     }
 
+
     public function submit()
-    {
-        $this->validate();
+{
+    $this->validate();
 
-        $this->design->save();
-        $this->syncMedia();
-        event(new DesignCreated($this->design));
+    // Assign the selected project and post IDs to the design instance
+    $this->design->project_id = $this->selectedProjectId;
+    $this->design->post_id = $this->selectedProjectId;
+    $this->design->save();
+    $this->syncMedia();
+    event(new DesignCreated($this->design));
 
-        return redirect()->route('admin.designs.index');
-    }
+    return redirect()->route('admin.designs.index');
+}
+
+
+
 
     protected function rules(): array
     {

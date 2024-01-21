@@ -13,7 +13,7 @@ class VideoUpdatedEmail
 {
     public function handle(object $event): void
     {
-        $video      = $event->video;
+        $video     = $event->video;
         $project   = $video->project;
         $assignees = $project->assignees()->get();
 
